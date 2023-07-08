@@ -7,6 +7,7 @@ export const getPokemons = createAsyncThunk('pokemons/getPokemons', async ({ pag
         let url = `/pokemons?page=${page}&limit=${POKEMONS_PER_PAGE}`;
         if (search) url += `&search=${search}`;
         if (type) url += `&type=${type}`;
+      
         const response = await apiService.get(url);
         const timeout = () => {
             return new Promise((resolve) => {
@@ -17,6 +18,7 @@ export const getPokemons = createAsyncThunk('pokemons/getPokemons', async ({ pag
         };
         await timeout();
         return response.data;
+
     } catch (error) {
         return rejectWithValue(error);
     }
